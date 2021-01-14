@@ -1,0 +1,14 @@
+type Mutation {
+  registUser(
+    name: String!
+    email: String!
+    nickname: String!
+    mobile: String!
+    zonecode: String!
+    address: String!
+    detailAddress: String!
+  ): Boolean!
+
+  tryLogin(email: String!): Boolean!
+  checkSecretCode(email: String!, code: String!): Boolean!
+}
