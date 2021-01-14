@@ -7,5 +7,4 @@ type User {
   zoneCode: String!
   address: String!
   detailAddress: String!
-  secretCode: String!
 }

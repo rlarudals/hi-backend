@@ -19,7 +19,7 @@ const connect = () => {
         console.log(error);
         console.log(`❌ CONNECTION FAILED TRY AGAIN`);
       } else {
-        console.log(`✅ MONGODB CONNECTION SUCCEES`);
+        console.log(`⭕ MONGODB CONNECTION SUCCEES`);
       }
     }
   );

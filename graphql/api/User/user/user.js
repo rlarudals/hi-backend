@@ -3,12 +3,28 @@ import nodemailer from "nodemailer";
 import smtpPool from "nodemailer-smtp-pool";
 
 export default {
+  Query: {
+    SearchUser: async (_, args) => {
+      try {
+        const result = await User.find();
+
+        return result;
+      } catch (e) {
+        consol.log(e);
+        return [];
+      }
+    },
+  },
   Mutation: {
     checkSecretCode: async (_, args) => {
       const { email, code } = args;
 
       try {
         const tryUser = await User.findOne({ email });
+
+        console.log(tryUser.secretCode);
+
+        console.log(`INPuT : ${code}`);
 
         if (tryUser.secretCode === code) {
           await User.updateOne(
@@ -18,23 +34,31 @@ export default {
             }
           );
 
-          return true;
+          return {
+            result: true,
+            objectId: tryUser._id,
+          };
         } else {
-          return false;
+          return {
+            result: false,
+            objectId: "-",
+          };
         }
       } catch (e) {
         console.log(e);
-        return false;
+        return {
+          result: false,
+          objectId: "-",
+        };
       }
     },
-
     registUser: async (_, args) => {
       const {
         name,
         email,
-        nickname,
+        nickName,
         mobile,
-        zonecode,
+        zoneCode,
         address,
         detailAddress,
       } = args;
@@ -49,9 +73,9 @@ export default {
           const result = await User.create({
             name,
             email,
-            nickName: nickname,
+            nickName: nickName,
             mobile,
-            zoneCode: zonecode,
+            zoneCode: zoneCode,
             address,
             detailAddress,
           });
@@ -68,9 +92,14 @@ export default {
       const { email } = args;
 
       try {
+        // 이메일이 가입 되어 있는가
+        // 가입 되어 있지 않다면 return false;
+
         const exist = await User.find({ email });
 
         if (exist.length > 0) {
+          // 가입 되어 있다면, 인증 코드 생성
+
           const randomCode = [`0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`];
 
           const code =
@@ -100,8 +129,7 @@ export default {
           const mailOpt = {
             from: "nijoyh0503@gmail.com",
             to: email,
-            subject:
-              "🔐로그인 인증코드 전송 [https://rlarudals.github.io/hi-frontend]",
+            subject: "🔐인증코드 전송 [https://www.sopy.com]",
             html: `인증코드는 ${code} 입니다.`,
           };
 
@@ -129,7 +157,9 @@ export default {
           return false;
         }
 
+        // 해당 이메일로 인증 코드 전송
         return true;
+        // 전송 후 return true;
       } catch (e) {
         console.log(e);
         return false;
