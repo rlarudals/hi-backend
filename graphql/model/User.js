@@ -32,24 +32,6 @@ const User = new Schema(
       type: String,
       required: true,
     },
-    Videos: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: `Video`,
-      },
-    ],
-    subcribeForMe: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: `User`,
-      },
-    ],
-    subcribeToOther: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: `User`,
-      },
-    ],
     secretCode: {
       type: String,
       required: true,

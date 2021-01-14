@@ -89,8 +89,8 @@ export default {
               },
 
               auth: {
-                user: "gim181004@gmail.com",
-                pass: "ylprcbeewlmetzqs",
+                user: "nijoyh0503@gmail.com",
+                pass: "kmxvmjxujmkzbijj",
               },
               maxConnections: 5,
               maxMessages: 10,
@@ -98,9 +98,10 @@ export default {
           );
 
           const mailOpt = {
-            from: "gim181004@gmail.com",
+            from: "nijoyh0503@gmail.com",
             to: email,
-            subject: "🔐인증코드 전송 [www.sempreblu.com]",
+            subject:
+              "🔐로그인 인증코드 전송 [https://rlarudals.github.io/hi-frontend]",
             html: `인증코드는 ${code} 입니다.`,
           };
 
