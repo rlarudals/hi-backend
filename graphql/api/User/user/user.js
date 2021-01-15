@@ -3,18 +3,18 @@ import nodemailer from "nodemailer";
 import smtpPool from "nodemailer-smtp-pool";
 
 export default {
-  Query: {
-    SearchUser: async (_, args) => {
-      try {
-        const result = await User.find();
+  // Query: {
+  //   SearchUser: async (_, args) => {
+  //     try {
+  //       const result = await User.find();
 
-        return result;
-      } catch (e) {
-        consol.log(e);
-        return [];
-      }
-    },
-  },
+  //       return result;
+  //     } catch (e) {
+  //       consol.log(e);
+  //       return [];
+  //     }
+  //   },
+  // },
   Mutation: {
     checkSecretCode: async (_, args) => {
       const { email, code } = args;
@@ -23,12 +23,11 @@ export default {
         const tryUser = await User.findOne({ email });
 
         console.log(tryUser.secretCode);
-
         console.log(`INPuT : ${code}`);
 
         if (tryUser.secretCode === code) {
           await User.updateOne(
-            { email },
+            { email: email },
             {
               $set: { secretCode: `` },
             }
