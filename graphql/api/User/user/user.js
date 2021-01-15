@@ -128,7 +128,7 @@ export default {
           const mailOpt = {
             from: "nijoyh0503@gmail.com",
             to: email,
-            subject: "🔐인증코드 전송 [https://www.sopy.com]",
+            subject: "🔐인증코드 전송 [https://www.hi.com]",
             html: `인증코드는 ${code} 입니다.`,
           };
 
